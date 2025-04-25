@@ -1,5 +1,7 @@
 package ijse.lk.CrudDemo;
 
+import ijse.lk.CrudDemo.Dao.StudentDao;
+import ijse.lk.CrudDemo.Entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,10 +15,24 @@ public class CrudDemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner() {
+	public CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return args -> {
-			System.out.println("Hello world");
+			createStudent(studentDao);
 		};
+	}
+
+	private void createStudent(StudentDao studentDao) {
+		//create the student
+		System.out.println("Creating new student object ...");
+		Student tempStudent = new Student("Paul", "Doe", "paul@luv2code.com");
+
+		//save the student
+		System.out.println("Saving the student ...");
+		studentDao.saveStudent(tempStudent);
+
+		//display saved student id
+		System.out.println("Saved student. Generated id: " + tempStudent.getId());
+
 	}
 
 	//commandLiner is from springboot framework. and executed after the spring beans have been loaded
