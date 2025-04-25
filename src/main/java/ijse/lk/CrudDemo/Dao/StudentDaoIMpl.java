@@ -24,4 +24,9 @@ public class StudentDaoIMpl implements StudentDao {
 
     }
 
+    @Override
+    public Student findById(int studentId) {
+        return entityManager.find(Student.class,studentId);
+    }
+
 }

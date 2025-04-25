@@ -16,10 +16,33 @@ public class CrudDemoApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDao studentDao) {
+		//spring automatically inject studentDao
 		return args -> {
 			//createStudent(studentDao);
-			createMultipleStudents(studentDao);
+			//createMultipleStudents(studentDao);
+			readStudent(studentDao);
 		};
+	}
+
+	private void readStudent(StudentDao studentDao) {
+		// create  a student object
+		System.out.println("Creating new student object ...");
+		Student tempStudent = new Student("Daffy", "Duck", "daffy@luv2code.com");
+
+		// save the student
+		System.out.println("Saving the student ...");
+		studentDao.saveStudent(tempStudent);
+
+		// display id of the saved student
+		int theId = tempStudent.getId();
+		System.out.println("Saved student. Generated id: " + theId);
+
+		// retrieve student based on the id: primary key
+		System.out.println("Retrieving student with id: " + theId);
+		Student myStudent = studentDao.findById(theId);
+
+		// display student
+		System.out.println("Found the student: " + myStudent);
 	}
 
 	private void createMultipleStudents(StudentDao studentDao) {

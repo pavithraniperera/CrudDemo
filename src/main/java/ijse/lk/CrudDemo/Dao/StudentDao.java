@@ -4,4 +4,5 @@ import ijse.lk.CrudDemo.Entity.Student;
 
 public interface StudentDao {
     void saveStudent(Student theStudent);
+    Student findById(int studentId);
 }
